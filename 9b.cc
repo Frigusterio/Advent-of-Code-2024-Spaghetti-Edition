@@ -33,7 +33,7 @@ signed main()
     n = blocks.size();
     int i = n - 1;
     
-    while (fileID >= 0 and i >= 0)
+    while (fileID >= 0)
     {
         //cout << "Checking file ID " << fileID << " in spot " << i << endl;
 
