@@ -51,8 +51,40 @@ long long stones(int value, long long blinks)
     return s;
 }
 
+// https://stackoverflow.com/a/25115163
+ostream& operator<<(ostream& dest, int value)
+{
+    ostream::sentry s( dest );
+    if ( s ) {
+        __uint128_t tmp = value < 0 ? -value : value;
+        char buffer[ 128 ];
+        char* d = end( buffer );
+        do
+        {
+            -- d;
+            *d = "0123456789"[ tmp % 10 ];
+            tmp /= 10;
+        } while ( tmp != 0 );
+        if ( value < 0 ) {
+            -- d;
+            *d = '-';
+        }
+        int len = end( buffer ) - d;
+        if ( dest.rdbuf()->sputn( d, len ) != len ) {
+            dest.setstate(ios_base::badbit);
+        }
+    }
+    return dest;
+}
+
 signed main()
 {
+    /*long long n;
+    while (cin >> n)
+    {
+        cout << stones(n, 75) << endl;
+    }*/
+
     ifstream file("11.input");
     string s;
     getline(file, s);
@@ -60,11 +92,17 @@ signed main()
 
     int n = v.size();
 
-    long long blinks;
+    long long blinks = 75;
     while (cin >> blinks)
     {
         long long out = 0;
         for (int i = 0; i < n; i++) out += stones(v[i], blinks);
         cout << out << endl;
     }
+
+    /*for (pair<pair<int, long long>, long long> x : blinkmap)
+    {
+        cout << "{{" << x.first.first << "," << x.first.second << "}," << x.second << "}, ";
+    }*/
+    //cout << blinkmap.size() << endl;
 }
