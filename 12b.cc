@@ -8,20 +8,37 @@ using namespace std;
 
 const vector<pair<int, int>> DIRS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
+vector<string> gardenBad;
+vector<vector<int>> garden;
+int id = 0, n, m;
+
+void dfs(pair<int, int> plot)
+{
+    if (garden[plot.x][plot.y] != -1) return;
+    garden[plot.x][plot.y] = id;
+    for (int d = 0; d < 4; d++)
+    {
+        pair<int, int> nextPlot = {plot.x + DIRS[d].x, plot.y + DIRS[d].y};
+        bool validPos = 0 <= nextPlot.x and nextPlot.x < n and 0 <= nextPlot.y and nextPlot.y < m;
+        if (validPos and gardenBad[nextPlot.x][nextPlot.y] == gardenBad[plot.x][plot.y] and garden[nextPlot.x][nextPlot.y] == -1)
+        {
+            //cout << "Push " << nextPlot.x << ' ' << nextPlot.y << ": " << gardenBad[nextPlot.x][nextPlot.y] << ", " << garden[nextPlot.x][nextPlot.y] << endl;
+            dfs(nextPlot);
+        }
+    }
+}
+
 int main()
 {
     ifstream file("12.eric");
     string s;
 
-    vector<string> gardenBad;
-
     while (getline(file, s)) gardenBad.push_back(s);
 
-    int n = gardenBad.size();
-    int m = gardenBad[0].size();
+    n = gardenBad.size();
+    m = gardenBad[0].size();
 
-    vector<vector<int>> garden (n, vector<int> (m, -1));
-    int id = 0;
+    garden.resize(n, vector<int> (m, -1));
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -29,6 +46,8 @@ int main()
             //cout << "Checking " << i << ", " << j << ": " << gardenBad[i][j] << endl;
             if (garden[i][j] == -1)
             {
+                dfs({i, j});
+                /*
                 //cout << i << ' ' << j << endl;
                 queue<pair<int, int>> region;
                 region.push({i, j});
@@ -49,7 +68,7 @@ int main()
                             region.push(nextPlot);
                         }
                     }
-                }
+                }*/
                 id++;
             }
         }
