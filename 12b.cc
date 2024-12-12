@@ -14,7 +14,7 @@ int id = 0, n, m;
 
 void dfs(pair<int, int> plot)
 {
-    if (garden[plot.x][plot.y] != -1) return;
+    //if (garden[plot.x][plot.y] != -1) return;
     garden[plot.x][plot.y] = id;
     for (int d = 0; d < 4; d++)
     {
