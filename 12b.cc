@@ -10,7 +10,7 @@ const vector<pair<int, int>> DIRS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
 int main()
 {
-    ifstream file("12.input");
+    ifstream file("12.eric");
     string s;
 
     vector<string> gardenBad;
@@ -108,6 +108,7 @@ int main()
     for (int i = 0; i < id; i++)
     {
         price += areas[i] * perimeters[i];
+        //cout << i << ": " << perimeters[i] << endl; <-- per l'eric
     }
     cout << price << endl;
 }
