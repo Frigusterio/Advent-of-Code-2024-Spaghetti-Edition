@@ -9,14 +9,14 @@ int n, m;
 void printThing(vector<pair<int, int>>& p)
 {
     int r = p.size();
-    for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++)
     {
-        for (int j = 0; j < m; j++)
+        for (int i = 0; i < n; i++)
         {
-            bool hasRobot = false;
-            for (int k = 0; k < r and !hasRobot; k++)
-                hasRobot = p[k].x == i and p[k].y == j;
-            if (hasRobot) cout << '#';
+            int robots = 0;
+            for (int k = 0; k < r; k++)
+                robots += p[k].x == i and p[k].y == j;
+            if (robots > 0) cout << robots;
             else cout << ' ';
         }
         cout << endl;
@@ -40,7 +40,7 @@ int main()
     }
 
     int r = p.size();
-    int t = 0;
+    int t = 6446;
     int centralDensity = 0;
     for (int i = 0; i < r; i++)
     {
