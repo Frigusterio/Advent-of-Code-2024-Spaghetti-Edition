@@ -33,11 +33,13 @@ int main()
         int dir = q.front().second;
         q.pop();
 
-        pint next = {pos.x + DIRS[dir].x, pos.y + DIRS[dir].y};
+        //Maze works in movements of 2 (epic optimization)
+        pint front = {pos.x + DIRS[dir].x, pos.y + DIRS[dir].y};
+        pint next = {pos.x + 2 * DIRS[dir].x, pos.y + 2 * DIRS[dir].y};
 
-        if (maze[next.x][next.y] != '#' and points[next.x][next.y][dir] > points[pos.x][pos.y][dir] + 1)
+        if (maze[front.x][front.y] != '#' and points[next.x][next.y][dir] > points[pos.x][pos.y][dir] + 2)
         {
-            points[next.x][next.y][dir] = points[pos.x][pos.y][dir] + 1;
+            points[next.x][next.y][dir] = points[pos.x][pos.y][dir] + 2;
             q.push({next, dir});
         }
         if (points[pos.x][pos.y][(dir + 1) % 4] > points[pos.x][pos.y][dir] + 1000)

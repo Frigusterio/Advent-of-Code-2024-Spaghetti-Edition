@@ -54,17 +54,23 @@ int main()
         pint pos = q.front().first;
         int dir = q.front().second;
         q.pop();
+        
+        //Maze works in movements of 2 (epic optimization)
+        pint front = {pos.x + DIRS[dir].x, pos.y + DIRS[dir].y};
+        pint next = {pos.x + 2 * DIRS[dir].x, pos.y + 2 * DIRS[dir].y};
 
-        pint next = {pos.x + DIRS[dir].x, pos.y + DIRS[dir].y};
-
-        if (maze[next.x][next.y] != '#')
+        if (maze[front.x][front.y] != '#')
         {
-            if (points[next.x][next.y][dir] == points[pos.x][pos.y][dir] + 1)
-                parents[next.x][next.y][dir].push_back({pos, dir});
-            else if (points[next.x][next.y][dir] > points[pos.x][pos.y][dir] + 1)
+            if (points[next.x][next.y][dir] == points[pos.x][pos.y][dir] + 2)
             {
-                points[next.x][next.y][dir] = points[pos.x][pos.y][dir] + 1;
-                parents[next.x][next.y][dir] = {{pos, dir}};
+                parents[next.x][next.y][dir].push_back({front, dir});
+                parents[front.x][front.y][dir].push_back({pos, dir});
+            }
+            else if (points[next.x][next.y][dir] > points[pos.x][pos.y][dir] + 2)
+            {
+                points[next.x][next.y][dir] = points[pos.x][pos.y][dir] + 2;
+                parents[next.x][next.y][dir] = {{front, dir}};
+                parents[front.x][front.y][dir] = {{pos, dir}};
                 q.push({next, dir});
             }
         }
