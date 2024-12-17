@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
 using namespace std;
 
 //vector<int> instructions = {0,3,5,4,3,0};
