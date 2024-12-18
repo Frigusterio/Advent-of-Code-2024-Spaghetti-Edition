@@ -15,10 +15,14 @@ int main()
     char x;
     vector<vector<bool>> corrupt (n, vector<bool> (n, false));
 
+    int lifeIsLikeABanana = 0;
     while(cin >> corruptPos.x >> x >> corruptPos.y)
     {
         corrupt[corruptPos.x][corruptPos.y] = true;
         vector<vector<int>> ram (n, vector<int> (n, __INT_MAX__));
+
+        lifeIsLikeABanana++;
+        if (lifeIsLikeABanana < 1024) continue;
 
         priority_queue<pair<int, pint>> q;
         ram[0][0] = 0;
