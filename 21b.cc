@@ -10,7 +10,7 @@ using namespace std;
 const vector<pint> numpadCoords = {{1, 0}, {0, 1}, {1, 1}, {2, 1}, {0, 2}, {1, 2}, {2, 2}, {0, 3}, {1, 3}, {2, 3}, {2, 0}};
 const pint A = {2, 1}, RIGHT = {2, 0}, UP = {1, 1}, LEFT = {0, 0}, DOWN = {1, 0};
 
-const int ROBOTS = 26;
+const int ROBOTS = 3;
 vector<vector<vector<vector<vector<int>>>>> cache;
 
 int moveitboi(const int& robot, const pint& start, const pint& goal)
